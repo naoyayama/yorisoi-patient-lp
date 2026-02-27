@@ -1,0 +1,155 @@
+import React from 'react';
+
+interface IllustrationProps {
+  src: string;
+  alt: string;
+  className?: string;
+}
+
+const ImageIllustration: React.FC<IllustrationProps> = ({ src, alt, className }) => (
+  <div className={`relative flex items-center justify-center overflow-hidden ${className}`}>
+    <img 
+      src={src} 
+      alt={alt} 
+      className="w-full h-full object-contain mix-blend-multiply"
+      onError={(e) => {
+        // Fallback for missing images - shows a soft-colored placeholder
+        const target = e.target as HTMLImageElement;
+        target.onerror = null;
+        target.src = 'data:image/svg+xml;charset=UTF-8,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Crect width="100" height="100" fill="%23f0faf5" /%3E%3Ctext x="50%25" y="50%25" font-family="sans-serif" font-size="10" fill="%23888" text-anchor="middle" dy=".3em"%3EImage Placeholder%3C/text%3E%3C/svg%3E';
+      }}
+    />
+  </div>
+);
+
+/**
+ * ① ヒーロー画像（スマホと握手）
+ */
+export const ConsultationIllustration: React.FC<{ className?: string }> = ({ className }) => (
+  <ImageIllustration 
+    src="/images/hero.png"
+    alt="よりそい：スマホと人の握手"
+    className={className}
+  />
+);
+
+/**
+ * ② 悩みセクション：【混乱】
+ */
+export const ConfusedIllustration: React.FC<{ className?: string }> = ({ className }) => (
+  <ImageIllustration 
+    src="/images/confused.png"
+    alt="悩み：混乱"
+    className={className}
+  />
+);
+
+/**
+ * ② 悩みセクション：【育児】
+ */
+export const MotherBabyIllustration: React.FC<{ className?: string }> = ({ className }) => (
+  <ImageIllustration 
+    src="/images/mother.png"
+    alt="悩み：育児中の通院"
+    className={className}
+  />
+);
+
+/**
+ * ② 悩みセクション：【不安】
+ */
+export const FamilyIllustration: React.FC<{ className?: string }> = ({ className }) => (
+  <ImageIllustration 
+    src="/images/family.png"
+    alt="悩み：家族の不安"
+    className={className}
+  />
+);
+
+/**
+ * ③ 仕組み・操作：【完了チェック】
+ */
+export const NotificationIllustration: React.FC<{ className?: string }> = ({ className }) => (
+  <ImageIllustration 
+    src="/images/check.png"
+    alt="操作完了"
+    className={className}
+  />
+);
+
+/**
+ * ③ 仕組み・操作：【操作する手】
+ */
+export const RecordingIllustration: React.FC<{ className?: string }> = ({ className }) => (
+  <ImageIllustration 
+    src="/images/recording.png"
+    alt="録音開始"
+    className={className}
+  />
+);
+
+/**
+ * ④ 信頼・安心：【セキュリティの盾】
+ */
+export const SecurityShieldIllustration: React.FC<{ className?: string }> = ({ className }) => (
+  <ImageIllustration 
+    src="/images/security.png"
+    alt="セキュリティ"
+    className={className}
+  />
+);
+
+/**
+ * ④ 信頼・安心：【OKサインの医師】
+ */
+export const DoctorTrustIllustration: React.FC<{ className?: string }> = ({ className }) => (
+  <ImageIllustration 
+    src="/images/doctor.png"
+    alt="安心の医師"
+    className={className}
+  />
+);
+
+/**
+ * ⑤ 追加：【「覚えること」はAIに任せて】
+ */
+export const PatientIllustration: React.FC<{ className?: string }> = ({ className }) => (
+  <ImageIllustration 
+    src="/images/patient.png"
+    alt="患者さん：AIにお任せ"
+    className={className}
+  />
+);
+
+/**
+ * ⑥ 追加：【お子様が泣いても大丈夫】
+ */
+export const ParentIllustration: React.FC<{ className?: string }> = ({ className }) => (
+  <ImageIllustration 
+    src="/images/parent.png"
+    alt="パパ・ママ：お子様の通院"
+    className={className}
+  />
+);
+
+/**
+ * ⑦ 追加：【診察の内容を、AIがやさしく「要約」】
+ */
+export const SummaryIllustration: React.FC<{ className?: string }> = ({ className }) => (
+  <ImageIllustration 
+    src="/images/summary.png"
+    alt="AI要約機能"
+    className={className}
+  />
+);
+
+/**
+ * ⑧ 追加：【目的外利用なし】
+ */
+export const PrivacyIllustration: React.FC<{ className?: string }> = ({ className }) => (
+  <ImageIllustration 
+    src="/images/privacy.png"
+    alt="目的外利用なし"
+    className={className}
+  />
+);
