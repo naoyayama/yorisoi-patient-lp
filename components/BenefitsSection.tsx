@@ -1,61 +1,70 @@
+import React, { useState } from 'react';
 
-import React from 'react';
-import { PatientIllustration, ParentIllustration } from './Illustrations';
+const benefits = [
+  {
+    tag: '患者さんへ',
+    title: '「覚えること」はAIに任せて、先生の目を見て話す',
+    desc: 'メモを取らなくて大丈夫。大事なポイントはAIが記録します。診察室では先生との会話に集中できます。',
+    point: '難しい説明も、あとでゆっくり見返せます。',
+    image: '/images/patient.png',
+    imageAlt: '覚えることはAIに任せて、先生の目を見て話すイメージ',
+  },
+  {
+    tag: 'パパ・ママへ',
+    title: 'お子さんが泣いていても大丈夫。AIが聞いています',
+    desc: '聞き逃しの不安を減らせます。あとでTo-Doを確認して、パートナーへも転送するだけ。',
+    point: '帰宅後の共有も、LINEでかんたんに。',
+    image: '/images/parent.png',
+    imageAlt: 'お子さんが泣いていても大丈夫、AIが聞いていますのイメージ',
+  },
+];
 
 const BenefitsSection: React.FC = () => {
+  const [imageError, setImageError] = useState<Record<number, boolean>>({});
+
   return (
-    <section className="py-24 bg-white overflow-hidden">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16 px-4">
-          <h2 className="text-[1.85rem] md:text-5xl font-black text-gray-900 mb-8 leading-[1.3]">
-            「よりそい」がある生活で、<br className="md:hidden" />通院はもっと安心に。
-          </h2>
-        </div>
+    <section className="py-20 sm:py-28 bg-white">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-ink text-center mb-16">
+          よりそいがあると、通院がもっと安心に
+        </h2>
 
-        <div className="space-y-24">
-          {/* Patient */}
-          <div className="flex flex-col md:flex-row items-center gap-12 max-w-5xl mx-auto">
-            <div className="flex-1 w-full max-w-[320px]">
-              <PatientIllustration className="w-full h-auto" />
+        <div className="space-y-16">
+          {benefits.map((b, i) => (
+            <div
+              key={i}
+              className={`flex flex-col ${i % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} md:items-center gap-10`}
+            >
+              <div className="flex-1">
+                <span className="inline-block px-3 py-1 rounded-full text-xs font-bold bg-primary-light text-primary mb-4">
+                  {b.tag}
+                </span>
+                <h3 className="text-xl sm:text-2xl font-bold text-ink mb-4 leading-snug">{b.title}</h3>
+                <p className="text-ink-muted mb-4 leading-relaxed">{b.desc}</p>
+                <p className="text-ink font-medium flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-primary text-white flex items-center justify-center text-xs">✓</span>
+                  {b.point}
+                </p>
+              </div>
+              <div className="flex-1 flex justify-center">
+                <div className="relative w-56 h-56 sm:w-64 sm:h-64 rounded-full overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.08)] ring-2 ring-white ring-offset-4 ring-offset-white">
+                  {!imageError[i] ? (
+                    <img
+                      src={b.image}
+                      alt={b.imageAlt}
+                      className="w-full h-full object-cover scale-125"
+                      onError={() => setImageError((prev) => ({ ...prev, [i]: true }))}
+                    />
+                  ) : null}
+                  {imageError[i] && (
+                    <span className="absolute inset-0 flex items-center justify-center text-6xl opacity-40 bg-slate-50" aria-hidden="true">
+                      {i === 0 ? '👤' : '👨‍👩‍👧'}
+                    </span>
+                  )}
+                </div>
+              </div>
             </div>
-            <div className="flex-1">
-              <div className="inline-block px-4 py-1.5 bg-green-50 text-green-700 rounded-full text-xs font-black uppercase tracking-widest mb-6 border border-green-100">患者さんご本人へ</div>
-              <h3 className="text-2xl md:text-4xl font-black mb-6 text-gray-900 leading-[1.4]">「覚えること」はAIに任せて、<br />先生の目を見てお話しください。</h3>
-              <p className="text-gray-600 text-[1.05rem] md:text-lg mb-8 leading-loose font-medium">
-                メモを取る必要はありません。大事なポイントはAIがすべて記録しています。診察室では、先生とのコミュニケーションに100%集中できます。
-              </p>
-              <ul className="space-y-6">
-                <li className="flex items-start gap-4 text-gray-700 font-bold text-[1.05rem]">
-                  <div className="mt-1 text-yorisoi-green flex-shrink-0">
-                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                  </div>
-                  難しい病状の説明も、あとでゆっくり見返せる。
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Parents */}
-          <div className="flex flex-col md:flex-row-reverse items-center gap-12 max-w-5xl mx-auto">
-            <div className="flex-1 w-full max-w-[320px]">
-              <ParentIllustration className="w-full h-auto" />
-            </div>
-            <div className="flex-1">
-              <div className="inline-block px-4 py-1.5 bg-peach-50 text-yorisoi-peach rounded-full text-xs font-black uppercase tracking-widest mb-6 border border-yorisoi-peach/20">パパ・ママへ</div>
-              <h3 className="text-2xl md:text-4xl font-black mb-6 text-gray-900 leading-[1.4]">お子様が泣いても大丈夫。<br />AIが代わりに聞いています。</h3>
-              <p className="text-gray-600 text-[1.05rem] md:text-lg mb-8 leading-loose font-medium">
-                子供のケアで手一杯の診察。聞き逃しや「あれ？」という不安をゼロに。AIがしっかり記録しているので、あとでゆっくりTo-Doを確認できます。
-              </p>
-              <ul className="space-y-6">
-                <li className="flex items-start gap-4 text-gray-700 font-bold text-[1.05rem]">
-                  <div className="mt-1 text-yorisoi-peach flex-shrink-0">
-                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                  </div>
-                  帰宅後、パートナーへの共有も転送するだけ。
-                </li>
-              </ul>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

@@ -20,7 +20,7 @@ import {
  * security.png, doctor.png, patient.png, parent.png, summary.png, privacy.png
  * を置いてください。
  */
-const USE_STATIC_IMAGES = true; // recording.png を配置済み。他は未配置時はプレースホルダー表示
+const USE_STATIC_IMAGES = false; // true にすると public/images/ の画像を使用。未配置時は SVG 表示
 
 interface IllustrationProps {
   src: string;
